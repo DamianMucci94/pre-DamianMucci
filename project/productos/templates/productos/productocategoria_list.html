@@ -1,0 +1,14 @@
+{% extends 'core/base.html' %}
+
+{% block header %}
+    Productos: Lista de categorías de productos
+{% endblock header %}
+
+{% block main %}
+    <div>
+        {% for object in productocategoria %}
+            <p>{{ object }}</p>        
+        {% endfor %}
+    </div>
+    <button><a href="{% url 'productos:index' %}">Volver</a></button>
+{% endblock main %}
