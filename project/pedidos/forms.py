@@ -6,8 +6,8 @@ class PedidoForm(forms.ModelForm):
     cliente = forms.ModelChoiceField(
         queryset=Cliente.objects.all(), empty_label="Seleccione un cliente"
     )
-    servicio = forms.ModelChoiceField(
-        queryset=ProductoCategoria.objects.filter(disponible=True), empty_label="Seleccione un servicio"
+    producto = forms.ModelChoiceField(
+        queryset=ProductoCategoria.objects.filter(disponible=True), empty_label="Seleccione un producto"
     )
 
     class Meta:
