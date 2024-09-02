@@ -1,0 +1,14 @@
+{% extends 'core/base.html' %}
+
+{% block header %}
+    Pedidos: Lista de pedidos
+{% endblock header %}
+
+{% block main %}
+    <div>
+        {% for object in pedidos %}
+            <p>{{ object }}</p>        
+        {% endfor %}
+    </div>
+    <button><a href="{% url 'pedidos:index' %}">Volver</a></button>
+{% endblock main %}
