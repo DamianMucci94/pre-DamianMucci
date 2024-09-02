@@ -5,5 +5,6 @@
 {% endblock header %}
 
 {% block main %}
-    <button><a href="{% url 'pedidos:pedidos_list' %}">Listar pedidos</a></button>
+    <button><a href="{% url 'pedidos:pedido_list' %}">Listar pedidos</a></button>
+    <button><a href="{% url 'pedidos:pedido_create' %}">Crear pedido</a></button>
 {% endblock main %}
