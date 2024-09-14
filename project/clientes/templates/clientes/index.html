@@ -5,7 +5,8 @@
 {% endblock header %}
 
 {% block main %}
-    <button><a href="{% url 'clientes:pais_list' %}">Listar países</a></button>
-    <button><a href="{% url 'clientes:cliente_list' %}">Listar clientes</a></button>
-    <button><a href="{% url 'clientes:cliente_create' %}">Crear cliente</a></button>
+    <div>
+        <button><a href="{% url 'clientes:cliente_list' %}">Clientes</a></button>
+        <button><a href="{% url 'clientes:pais_list' %}">Pais de origen</a></button>
+    </div>
 {% endblock main %}

@@ -1,14 +1,65 @@
 {% extends 'core/base.html' %}
 
 {% block header %}
-    Clientes: Lista de clientes
+    Clientes: Listado de clientes
 {% endblock header %}
 
 {% block main %}
     <div>
-        {% for object in clientes %}
-            <p>{{ object }}</p>        
+        <form method="get">
+            <input type="text" name="q" placeholder="Buscar..." />
+            <button type="submit">Buscar</button>
+        </form>
+        <button><a href="{% url 'clientes:cliente_create' %}">Crear Registro</a></button>
+    </div>
+    <div>
+        {% for object in object_list %}
+            <p>{{ object }}</p>
+        {% empty %}
+            <p>No hay registros</p>        
         {% endfor %}
+    </div>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 30%;">Apellido</th>
+                    <th style="width: 30%;">Nombre</th>
+                    <th style="width: 25%;">País de Origen</th>
+                    <th style="width: 5%;"></th>
+                    <th style="width: 5%;"></th>
+                    <th style="width: 5%;"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for object in object_list %}
+                    <tr>
+                        <td>{{ object.apellido | upper }}</td>
+                        <td>{{ object.nombre }}</td>
+                        <td>
+                            {% if object.pais_origen_id.nombre %}
+                                {{ object.pais_origen_id.nombre }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="#">Detalle</a>
+                        </td>
+                        <td>
+                            <a href="#">Cambiar</a>
+                        </td>
+                        <td>
+                            <a href="#">Borrar</a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="6">No hay registros</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
     <button><a href="{% url 'clientes:index' %}">Volver</a></button>
 {% endblock main %}

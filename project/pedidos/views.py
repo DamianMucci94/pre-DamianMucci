@@ -18,5 +18,5 @@ def pedido_create(request):
         form = PedidoForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("pedido_list")
+            return redirect("pedidos:pedido_list")
     return render(request, "pedidos/pedido_create.html", {"form": form})

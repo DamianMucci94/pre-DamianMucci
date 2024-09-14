@@ -19,5 +19,5 @@ def productocategoria_create(request):
         form = ProductoCategoriaForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("productocategoria_list")
+            return redirect("productos:productocategoria_list")
     return render(request, "productos/productocategoria_create.html", {"form": form})

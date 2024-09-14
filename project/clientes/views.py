@@ -1,19 +1,46 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 
-from .forms import ClienteForm
+from .forms import ClienteForm, PaisForm
 from .models import Cliente, Pais
 
+@login_required
 def index(request):
     return render(request, 'clientes/index.html')
 
 def pais_list(request):
-    paises = Pais.objects.all()
-    contexto = {'paises': paises}
+    q = request.GET.get('q')
+    if q:
+        query = Pais.objects.filter(nombre__icontains=q)
+    else:
+        query = Pais.objects.all()
+    contexto = {'object_list': query}
     return render(request, 'clientes/pais_list.html', contexto)
 
+def pais_create(request):
+    if request.method == 'GET':
+        form = PaisForm()
+    if request.method == 'POST':
+        form = PaisForm(request.POST)
+        if form.is_valid():
+            # print(form.cleaned_data)
+            form.save()
+            return redirect('clientes:pais_list')
+    return render(request, 'clientes/pais_create.html', {'form': form})
+
+def pais_detail(request, pk: int):
+    query = Pais.objects.get(id=pk)
+    context = {'object': query}
+    return render(request, 'clientes/pais_detail.html', context)
+
+
 def cliente_list(request):
-    clientes = Cliente.objects.all()
-    contexto = {'clientes': clientes}
+    q = request.GET.get('q')
+    if q:
+        query = Cliente.objects.filter(nombre__icontains=q)
+    else:
+        query = Cliente.objects.all()    
+    contexto = {'object_list': query}
     return render(request, 'clientes/cliente_list.html', contexto)
 
 def cliente_create(request):
@@ -23,5 +50,5 @@ def cliente_create(request):
         form = ClienteForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("cliente_list")
+            return redirect("clientes:cliente_list")
     return render(request, "clientes/cliente_create.html", {"form": form})
