@@ -1,14 +1,49 @@
 {% extends 'core/base.html' %}
 
 {% block header %}
-    Productos: Lista de categorías de productos
+    Productos: Listado de Categorías de Productos
 {% endblock header %}
 
 {% block main %}
     <div>
-        {% for object in productocategoria %}
-            <p>{{ object }}</p>        
-        {% endfor %}
+        <form method="get">
+            <input type="text" name="q" placeholder="Buscar..." />
+            <button type="submit">Buscar</button>
+        </form>
+        <a href="{% url 'productos:productocategoria_create' %}">
+            <button>Crear Registro</button>
+        </a>
     </div>
-    <button><a href="{% url 'productos:index' %}">Volver</a></button>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 70%;">Nombre</th>
+                    <th style="width: 10%;"></th>
+                    <th style="width: 10%;"></th>
+                    <th style="width: 10%;"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for object in object_list %}
+                    <tr>
+                        <td>{{ object.nombre }}</td>
+                        <td>
+                            <a href="{% url 'productos:productocategoria_detail' object.id %}">Detalle</a>
+                        </td>
+                        <td>
+                            <a href="{% url 'productos:productocategoria_update' object.id %}">Cambiar</a>
+                        </td>
+                        <td>
+                            <a href="{% url 'productos:productocategoria_delete' object.id %}">Borrar</a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="4">No hay registros</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock main %}
