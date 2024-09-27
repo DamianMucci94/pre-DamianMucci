@@ -37,11 +37,12 @@
                             <a href="{% url 'clientes:pais_detail' object.id %}">Detalle</a>
                         </td>
                         <td>
-                            <a href="#">Cambiar</a>
+                            <a href="{% url 'clientes:pais_update' object.id %}">Cambiar</a>
                         </td>
                         <td>
-                            <a href="#">Borrar</a>
+                            <a href="{% url 'clientes:pais_delete' object.id %}">Borrar</a>
                         </td>
+                    </tr>
                     </tr>
                 {% empty %}
                     <tr>

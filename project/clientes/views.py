@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 
 from .forms import ClienteForm, PaisForm
 from .models import Cliente, Pais
@@ -33,6 +36,15 @@ def pais_detail(request, pk: int):
     context = {'object': query}
     return render(request, 'clientes/pais_detail.html', context)
 
+class PaisUpdate(UpdateView):
+    model = Pais
+    form_class = PaisForm
+    success_url = reverse_lazy('clientes:pais_list')
+    template_name = 'clientes/pais_create.html'
+
+class PaisDelete(DeleteView):
+    model = Pais
+    success_url = reverse_lazy('clientes:pais_list')
 
 def cliente_list(request):
     q = request.GET.get('q')
@@ -52,3 +64,16 @@ def cliente_create(request):
             form.save()
             return redirect("clientes:cliente_list")
     return render(request, "clientes/cliente_create.html", {"form": form})
+
+class ClienteDetail(DetailView):
+    model = Cliente
+
+class ClienteUpdate(UpdateView):
+    model = Cliente
+    form_class = ClienteForm
+    success_url = reverse_lazy('clientes:clientes_list')
+    template_name = 'clientes/cliente_create.html'
+
+class ClienteDelete(DeleteView):
+    model = Cliente
+    success_url = reverse_lazy('clientes:clientes_list')

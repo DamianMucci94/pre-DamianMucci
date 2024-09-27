@@ -88,6 +88,8 @@ class ProductoCategoriaUpdate(UpdateView):
     model = ProductoCategoria
     form_class = ProductoCategoriaForm
     success_url = reverse_lazy('productos:productocategoria_list')
+    template_name = 'productos/productocategoria_create.html'
+
 
 
 # ****** DELETE

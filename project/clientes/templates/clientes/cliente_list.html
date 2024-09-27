@@ -44,13 +44,13 @@
                             {% endif %}
                         </td>
                         <td>
-                            <a href="#">Detalle</a>
+                            <a href="{% url 'clientes:cliente_detail' object.id %}">Detalle</a>
                         </td>
                         <td>
-                            <a href="#">Cambiar</a>
+                            <a href="{% url 'clientes:cliente_update' object.id %}">Cambiar</a>
                         </td>
                         <td>
-                            <a href="#">Borrar</a>
+                            <a href="{% url 'clientes:cliente_delete' object.id %}">Borrar</a>
                         </td>
                     </tr>
                 {% empty %}
