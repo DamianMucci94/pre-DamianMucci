@@ -1,0 +1,14 @@
+{% extends 'core/base.html' %}
+
+{% block header %}
+    Paises: Borrar paises
+{% endblock header %}
+
+{% block main %}
+    <p>¿Está seguro que desea borrar el pais "{{ object.nombre }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirmo</button>
+    </form>
+    {% include 'clientes/partials/volver_pais.html' %}
+{% endblock main %}
