@@ -36,11 +36,12 @@ header {
     border-radius: 1vh;
 }
 
-main{
+.main{
     display: flex;
-    justify-content: center;
+    flex-direction: column;
 }
-main img{
+
+.main img{
     height: 50vh;
     width: 80%;
 }
